@@ -59,8 +59,8 @@ Kalau mau berhenti merekam, klik tombol stop capture lalu tutup file capture.
  - Capture dari Wi‑Fi
  ![Tampilan Capture from Wi-Fi](asset/image/tampilanwifi.png)
  - Tampilan browser pada halaman contoh
- ![Tampilan Browser pada link html](asset/image/tampilanBrowserPadaLinkHtml.png)
+ ![Tampilan Browser pada link html](asset/image/tampilangaia.png)
  - Capture Wi‑Fi dengan filter HTTP
- ![Tampilan Capture from Wi-Fi With Filter HTTP](asset/image/tampilanCaptureFromWifiWithFilterHTTP.png)
+ ![Tampilan Capture from Wi-Fi With Filter HTTP](asset/image/tampilanhttp.png)
  - Line-based text data (response `text/html`)
- ![Line-Based Text Data: text/html](asset/image/lineBasedTextDataHtmlVer.png)
+ ![Line-Based Text Data: text/html](asset/image/tampilanlineBased.png)
