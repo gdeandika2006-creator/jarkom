@@ -55,7 +55,7 @@ Kalau mau berhenti merekam, klik tombol stop capture lalu tutup file capture.
 
 ### Lampiran hasil
  - Tampilan Wireshark
- ![Tampilan Wireshark](asset/image/tampilanWireshark.png)
+ ![Tampilan Wireshark](asset/image/tampilan-awal.png)
  - Capture dari Wi‑Fi
  ![Tampilan Capture from Wi-Fi](asset/image/tampilanCaptureFromWifi.png)
  - Tampilan browser pada halaman contoh
