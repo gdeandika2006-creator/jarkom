@@ -17,7 +17,6 @@ Nslookup adalah tool yang digunakan untuk mencari informasi DNS, seperti mengeta
 1.Buka Command Prompt, lalu masukan code berikut: nslookup www.mit.edu
 ![tampilanCMD](foto/cmd_nslookup%20www.mit.edu.png)
 Fungsi: untuk mengetahui alamat IP dari domain
-
 2.lalu masukan code ini juga: nslookup -type=NS mit.edu
 ![tampilanCMD](foto/CMD_nslookup%20-type=NS%20mit.edu.png)
 Fungsi: untuk mengetahui DNS server (authoritative server)
