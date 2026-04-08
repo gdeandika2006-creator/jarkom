@@ -22,7 +22,10 @@ Fungsi: untuk mengetahui alamat IP dari domain
 2.lalu masukan code ini juga: nslookup -type=NS mit.edu
 
 ![tampilanCMD](foto/CMD_nslookup%20-type=NS%20mit.edu.png)
+
 Fungsi: untuk mengetahui DNS server (authoritative server)
 
-
+3.lalu masukan lagi code nslookup "www.aiit.or.kr bitsy.mit.edu" ini di cmd
+![tampilanCMD](foto/CMDwww.aiit.or.kr%20bitsy.mit.edu.png)
+Fungsi: melakukan query ke DNS tertentu
 
