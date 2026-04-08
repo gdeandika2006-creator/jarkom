@@ -20,8 +20,8 @@ Fungsi: untuk mengetahui alamat IP dari domain
 
 
 2.lalu masukan code ini juga: nslookup -type=NS mit.edu
-
 ![tampilanCMD](foto/CMD_nslookup%20-type=NS%20mit.edu.png)
-
 Fungsi: untuk mengetahui DNS server (authoritative server)
+
+
 
