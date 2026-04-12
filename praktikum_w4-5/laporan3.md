@@ -66,3 +66,104 @@ fungsi:Menampilkan IP address, DNS server, dan informasi jaringan lainnya.
 ![tampilanCMD](foto/CMDipconfig%20displaydns.png)
 
 5.lalu jika ingin menghapus chache bisa menggunakan command "ipconfig /flushdns"
+![tampilanCMD](foto/CMDipconfig%20flushdns.png)
+
+## Modul 4.4 Tracing DNS dengan Wireshark
+Tracing DNS digunakan untuk melihat proses request dan response DNS menggunakan Wireshark.
+
+## A. Analisis DNS Request dan Response pada Akses Website (www.ietf.org)
+
+### Langkah - Langkah Percobaan
+1.buka cmd dan masukan command "ipconfig" jika ingin melihat IPv4 address 
+![tampilanCMD](foto/CMDipconfig.png)
+
+2.setelah mendapatkan IPv4 address masing-masing lalu buka wireshark dan click wifi kemudian masukkan di filter ip.addr == 192.168.1.4 (sesuai IPv4 masing-masing)
+![tampilanwireshark](foto/WiresharkIPaddres.png)
+
+3.lalu masuk ke web "https://www.ietf.org/" 
+![tampilanweb](foto/webhttpswww.ietf.org.png)
+
+4.kemudian masuk kembali ke wireshark dan masukkan di filter dengan " ip.addr == 192.168.1.4 && dns.qry.name contains "ietf" "
+![tampilanwireshark](foto/wiresharkhttpswww.ietf.org.png)
+
+### Pertanyaan
+
+1.Apakah DNS menggunakan UDP atau TCP?
+
+![tampilanwireshark](foto/dnsudp.png)
+
+Jawab: Dns menggunakan UDP
+
+2.Port tujuan pada DNS request & port sumber pada DNS response 
+
+Jawab:
+
+-DNS REQUEST -> Source Port (client): 63768 & Destination Port (server): 53
+
+DNS RESPONSE -> Source Port (server): 53 & Destination Port (client): 63768 
+
+![tampilanwireshark](foto/dnsudp.png)
+
+## Analisis DNS Menggunakan Perintah nslookup (www.mit.edu)
+
+### Langkah - Langkah Percobaan
+
+1.buka cmd lalu masukan command nslookup www.mit.edu
+![tampilanCMD](foto/CMDhttpswww.mit.edu.png)
+
+2.kemudian masuk kembali ke wireshark dan masukkan di filter dengan DNS, lalu ambil data dari Standard query (request) dan Standard query response dari www.mit.edu
+![tampilanwireshark](foto/wiresharkhttpswww.mit.edu.png)
+
+### Pertanyaan
+
+1.Port tujuan request dan port sumber dari response Jawab:
+
+- DNS REQ -> port 53
+![tampilanwireshark](foto/dnsreq.png)
+- DNS RESPONSE ->
+![tampilanwireshark](foto/wiresharkresponse.png)
+
+2.Ke  alamat  IP  manakah  pesan  permintaan  DNS  dikirimkan?
+jawab:
+Request DNS dikirim ke alamat IP 2001:448a:c0f0:11ff:66fd:5060:b249:bd9f, alamat tersebut merupakan alamat lokal (IPv6) yang digunakan sebagai DNS server dalam jaringan
+![tampilanwireshark](foto/wiresharkipaddresdns.png)
+
+3.Periksa pesan permintaan DNS. Apa ”jenis” atau ”type” dari pesan tersebut? Apakah pesan tersebut mengandung ”jawaban” atau ”answers”?
+Jawab:
+Tipe DNS request adalah A (Address Record). Pesan ini tidak mengandung jawaban karena hanya berupa permintaan 
+![tampilanwireshark](foto/dnsreq.png)
+
+4.Periksa pesan balasan DNS. Berapa banyak ”jawaban” atau “answers” yang terdapat di dalamnya. Apa saja isi yang terkandung dalam setiap jawaban tersebut? 
+jawab:
+Terdapat 3 jawaban
+- Jawaban pertama menunjukkan bahwa domain www.mit.edu merupakan alias (CNAME) ke www.mit.edu.edgekey.net, yang berarti domain utama diarahkan ke domain lain.
+- Jawaban kedua menunjukkan alias lanjutan, yaitu www.mit.edu.edgekey.net kembali diarahkan (CNAME) ke e9566.dscb.akamaiedge.net.
+- Jawaban ketiga merupakan hasil akhir berupa A record, yaitu alamat IP 23.217.163.122, yang menjadi tujuan sebenarnya dari proses resolusi domain tersebut. 
+![tampilanwireshark](foto/wiresharkjawaban.png)
+
+## Analisis DNS Record NS Menggunakan nslookup (mit.edu)
+1.buka cmd lalu masukan command nslookup -type=NS mit.edu 
+
+![tampilanCMD](foto/CMD_nslookup%20-type=NS%20mit.edu.png)
+
+2.kemudian masuk kembali ke wireshark dan masukkan di filter dengan DNS, lalu ambil data dari Standard query (request) dari www.mit.edu
+![tampilanwireshark](foto/nsmitedu.png)
+
+### Langkah - Langkah Percobaan
+
+1.Ke  alamat  IP  manakah  pesan  permintaan  DNS  dikirimkan?
+Jawab: Request DNS dikirim ke alamat IP 2001:4489: yang merupakan DNS default pada jaringan
+![tampilanwireshark](foto/nsmitedu.png)
+
+2.apakah pesan tersebut mengandung ”jawaban” atau ”answers”?  
+Jawab: Tipe DNS request adalah NS. Pesan ini tidak mengandung jawaban karena hanya berupa permintaan 
+![tampilanwireshark](foto/nsmitedu.png)
+
+3.Apakah pesan balasan ini juga memberikan alamat IP untuk server MIT tersebut? 
+jawab: Pada DNS response, diperoleh beberapa nama server MIT. Pesan balasan ini umumnya hanya menampilkan nama server (NS record), dan tidak alamat IP secara langsung pada bagian answers 
+![tampilanwireshark](foto/nsmitjawaban.png)
+
+
+
+
+
