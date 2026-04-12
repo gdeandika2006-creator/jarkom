@@ -163,7 +163,72 @@ Jawab: Tipe DNS request adalah NS. Pesan ini tidak mengandung jawaban karena han
 jawab: Pada DNS response, diperoleh beberapa nama server MIT. Pesan balasan ini umumnya hanya menampilkan nama server (NS record), dan tidak alamat IP secara langsung pada bagian answers 
 ![tampilanwireshark](foto/nsmitjawaban.png)
 
+## Analisis DNS Menggunakan Server Tertentu, misal (www.aiit.or.kr bitsy.mit.edu)
+1.buka cmd lalu masukan command nslookup www.aiit.or.kr bitsy.mit.edu 
+![tampilanCMD](foto/CMDwww.aiit.or.kr%20bitsy.mit.edu.png)
 
+2.kemudian masuk kembali ke wireshark dan masukkan di filter dengan DNS, lalu ambil data dari Standard query (request) dari nslookup www.aiit.or.kr bitsy.mit.edu 
+![tampilanwireshark](foto/wiresharkwww.aiit.or.kr%20bitsy.mit.edu%20.png)
 
+### Langkah - Langkah Percobaan
+1.Apakah  alamat  IP  tersebut merupakan default alamat IP server DNS lokal Anda? 
+Jawab: Pesan permintaan DNS dikirim ke alamat IP 18.0.72.3. Alamat tersebut merupakan server bitsy.mit.edu yang ditentukan secara manual pada perintah nslookup, sehingga bukan merupakan DNS server lokal 
+![tampilanwireshark](foto/wiresharkwww.aiit.or.kr%20bitsy.mit.edu%20.png)
 
+2.Apakah pesan tersebut mengandung ”jawaban” atau ”answers”? 
+Jawab: Type dan answers request Jawab: Tipe DNS request adalah A (Address Record). Pesan ini tidak mengandung jawaban karena hanya berupa permintaan 
+![tampilanwireshark](foto/wiresharkwww.aiit.or.kr%20bitsy.mit.edu%20.png)
 
+3.Periksa pesan balasan DNS. Berapa banyak ”jawaban” atau “answers” yang terdapat di 
+dalamnya. Apa saja isi yang terkandung dalam setiap jawaban tersebut?
+jawab: tidak ada pesan balasan DNS karena DNS request timeout sehingga server bitsy.mit.edu tidak memberikan respon terhadap query yang dikirimkan. Akibatnya, tidak terdapat answers yang dapat dianalisis 
+![tampilanCMD](foto/CMDwww.aiit.or.kr%20bitsy.mit.edu.png)
+
+# MODUL UDP 5
+UDP (User Datagram Protocol) adalah salah satu protokol pada layer transport dalam model TCP/IP yang digunakan untuk mengirimkan data tanpa koneksi (connectionless). Artinya, UDP tidak melakukan proses pembentukan koneksi terlebih dahulu sebelum mengirim data.
+
+### Langkah - Langkah Percobaan
+1.Download file http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip
+2.Extract file dan cari file http-ethereal-trace-5
+3.lalu drag n drop file http-ethereal-trace-5 ke wireshark yang sudah di stop mengambil data
+4.lalu lakukan filter UDP dan pilih 1 paket UDP (bebas)
+![tampilanwireshark](foto/wiresharkUDP.png)
+
+### pertanyaan
+
+1.berapa banyak “field” yang terdapat pada header UDP?
+jawab: terdapat 4 field yaitu Source Port, Destination Port, Length, Checksum
+![tampilanwireshark](foto/wiresharkUDP.png)
+
+2.Berapa panjang (dalam satuan byte) masing-masing “field” yang terdapat pada header UDP? 
+jawab:
+Panjang tiap field Bedasarkan teori UDP :
+
+- Source Port = 2 byte
+- Destination Port = 2 byte
+- Length = 2 byte
+- Checksum = 2 byte Maka total = 8 byte
+
+3.Nilai yang tertera pada ”Length” menyatakan nilai apa?
+![tampilanwireshark](foto/wiresharkUDP.png)
+jawab:
+Nilai Length (59) pada protokol UDP menunjukkan keseluruhan panjang segmen UDP yang terdiri dari header sebesar 8 byte dan data/payload. Untuk mengetahui ukuran data yang dikirim, maka panjang total dikurangi ukuran header, yaitu 59 - 8 = 51 byte. Dengan demikian, ukuran data yang dibawa oleh paket UDP tersebut adalah 51 byte, dan hasil ini sesuai dengan informasi yang ditampilkan pada Wireshark yaitu UDP payload (51 byte).
+
+4.Berapa  jumlah  maksimum  byte  yang  dapat  disertakan  dalam  payload  UDP?
+Jawab:Header UDP memiliki ukuran tetap sebesar 8 byte, sedangkan ukuran maksimum paket IP adalah 65535 byte. Dalam paket IPv4, header IP standar berukuran 20 byte. Oleh karena itu, kapasitas maksimum data (payload) UDP dapat dihitung dengan mengurangi ukuran total IP dengan header IP dan header UDP: 65535 - 20 - 8 = 65507 byte. Jadi, ukuran maksimum payload yang dapat dikirim melalui UDP adalah 65507 byte.
+
+5.Berapa nomor port terbesar yang dapat menjadi port sumber?
+Jawab: Nomor port terbesar yang dapat digunakan pada protokol UDP adalah 65535. Hal ini karena field source port dan destination port pada header UDP masing-masing berukuran 16 bit. Dengan panjang 16 bit, jumlah nilai maksimum yang dapat direpresentasikan adalah 2¹⁶ - 1 = 65535. Oleh sebab itu, rentang nomor port UDP adalah 0 sampai 65535.
+
+6.Berapa nomor protokol untuk UDP? 
+![tampilanwireshark](foto/wiresharkprotocol.png)
+jawab:Nomor protokol UDP adalah 17 (desimal) atau 0x11 (heksadesimal)
+
+7.Periksa pasangan paket UDP di mana host Anda mengirimkan paket UDP pertama dan paket 
+UDP kedua merupakan balasan dari paket UDP yang pertama
+![tampilanwireshark](foto/wiresharkUDP.png)
+Jawab:
+
+- REQUEST -> Source Port : 4336 & Destination Port : 161
+- RESPONSE -> Source Port : 161 & Destination Port : 4336
+- Nomor port pada paket balasan merupakan kebalikan dari paket permintaan, di mana port sumber dan tujuan saling bertukar
