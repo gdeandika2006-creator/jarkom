@@ -3,6 +3,7 @@ NIM        : 103072400014
 Kelas      : IF-04-05  
 Mata Kuliah: Jaringan Komputer  
 __________________________________________
+
 # 6.2 Menangkap Tansfer TCP dalam Jumlah Besar dari Komputer Pribadi ke remote server
 TCP (Transmission Control Protocol) adalah protokol lapisan transport yang bersifat connection-oriented, sehingga koneksi harus dibangun terlebih dahulu sebelum data dikirim. TCP menjamin pengiriman data yang andal melalui mekanisme seperti sequence number, acknowledgment, flow control, dan congestion control.
 
