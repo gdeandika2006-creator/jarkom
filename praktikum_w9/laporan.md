@@ -1,7 +1,7 @@
 Nama       : Gde Andika Ananta Putra  
 NIM        : 103072400014  
 Kelas      : IF-04-05  
-Mata Kuliah: Jaringan Komputer  
+Mata Kuliah: Jaringan Komputer
 __________________________________________
 
 # Web Server
