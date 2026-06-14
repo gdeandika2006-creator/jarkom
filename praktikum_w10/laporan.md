@@ -57,8 +57,13 @@ Hasil Fragmentasi:
 ## 5. Carilah IPv6 di wireshark yang kalian lakukan
 IPv6 adalah versi terbaru dari Internet Protocol yang digunakan untuk komunikasi data di jaringan internet. IPv6 memiliki alamat 128-bit sehingga dapat menyediakan alamat IP lebih banyak dibandingkan IPv4.
 ### Analisis IPv6 di Wireshark
+
 1. Buka file ipv6_sample.pcap dengan wireshark
+
 ![wire](asset/image4.png)
+
 2. Filter "ipv6"
+
 ![wire](asset/image.png)
+
 Berdasarkan hasil capture Wireshark, terdeteksi paket yang menggunakan protokol IPv6, ditunjukkan oleh alamat sumber dan tujuan yang berformat heksadesimal dipisahkan tanda titik dua (:). Paket tersebut menggunakan TCP pada port 443, yang mengindikasikan komunikasi HTTPS. Selain itu, ditemukan beberapa TCP Retransmission, yang menunjukkan adanya pengiriman ulang paket selama proses komunikasi.
